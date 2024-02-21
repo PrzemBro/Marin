@@ -6,8 +6,16 @@ const menu = document.querySelector ('aside');
 const menuItems = document.querySelectorAll('aside ul li');
 
 const sections = [...document.querySelectorAll('.main section')];
-const footer = document.querySelector('#footer')
+const footer = document.querySelector('#footer');
 
+const navbar = document.querySelector('header .nav-box');
+
+// logo swap
+if(window.innerWidth < 1024){
+    document.querySelector('.logo img').src = 'img/marine logo white.png'
+}else if(window.innerWidth >= 1024) {
+    document.querySelector('.logo img').src = 'img/marine logo grey.png'
+}
 
 // burger
 burger.addEventListener("click", function(){
@@ -37,7 +45,7 @@ function changeImg() {
 }
 setInterval(changeImg, timeChange)
 
-// scroll animation
+// scroll animation / navbar fixed
 document.addEventListener('scroll', function(){
 
 const scrollValue = window.scrollY;
@@ -61,4 +69,16 @@ if(scrollValue > footer.offsetTop - footer.offsetHeight/2){
     footer.classList.remove('active')
 }
 
+if(scrollValue > 0){
+    navbar.classList.add('active');
+}else{
+    navbar.classList.remove('active')
+}
+
+// wykrycie kiedy strona zostala przewinieta do konca
+if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+    document.querySelector('header .nav-box.active').classList.add('bottom');
+}else{
+    document.querySelector('header .nav-box.active').classList.remove('bottom');
+}
 })
